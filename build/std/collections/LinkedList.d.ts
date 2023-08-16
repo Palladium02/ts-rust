@@ -1,0 +1,32 @@
+import { Ord } from '../cmp/Ord';
+import { Ordering } from '../cmp/Ordering';
+import { PartialEq } from '../cmp/PartialEq';
+import { PartialOrd } from '../cmp/PartialOrd';
+import { Iter } from '../iter/Iterator';
+import { Option } from '../option/Option';
+export declare class LinkedList<T extends PartialEq<T> & PartialOrd<T> & Ord<T>> implements PartialEq<LinkedList<T>>, PartialOrd<LinkedList<T>>, Ord<LinkedList<T>> {
+    private head;
+    private tail;
+    private length;
+    append(other: LinkedList<T>): void;
+    is_empty(): boolean;
+    len(): number;
+    clear(): void;
+    contains(x: T): boolean;
+    front(): Option<T>;
+    back(): Option<T>;
+    push_front(elt: T): void;
+    pop_front(): Option<T>;
+    push_back(elt: T): void;
+    pop_back(): Option<T>;
+    split_off(at: number): LinkedList<T>;
+    remove(at: number): void;
+    drain_filter<F extends (t: T) => boolean>(f: F): Iter<T>;
+    eq(rhs: LinkedList<T>): boolean;
+    ne(rhs: LinkedList<T>): boolean;
+    partial_cmp(rhs: LinkedList<T>): Option<Ordering>;
+    cmp(rhs: LinkedList<T>): Ordering;
+    max(rhs: LinkedList<T>): LinkedList<T>;
+    min(rhs: LinkedList<T>): LinkedList<T>;
+    static from_iter<T extends PartialEq<T> & PartialOrd<T> & Ord<T>>(iter: Iter<T>): LinkedList<T>;
+}
